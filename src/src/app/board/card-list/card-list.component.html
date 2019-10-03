@@ -1,11 +1,38 @@
 <div class="card-list">
     <div class="card-list-title">
-        <h5>{{name}}</h5>
+        <h5>{{cardList.name}}</h5>
     </div>
 
-    <div>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
+    <div 
+        cdkDropList 
+        [cdkDropListData]="cardList.cards"
+        class="card-list-itens" 
+        (cdkDropListDropped)="drop($event)">
+        
+        <div *ngFor="let card of cardList.cards" cdkDrag >
+            <app-card [card]='card'></app-card>
+            <div *cdkDragPlaceholder class="card-list-placeholder"></div>
+        </div>
+
     </div>
+
+    <!-- <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="todo"
+        [cdkDropListConnectedTo]="[doneList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+      </div>
+<hr>
+    <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="[todoList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+      </div> -->
 </div>
