@@ -1,0 +1,21 @@
+.card-list{
+    width: 300px;
+    height: 100%;
+    margin: 5px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2)
+}
+
+.card-list-title{
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+
+    h5{
+        margin: 0;
+    }
+}
+
+.card-list-itens{
+    display: flex;
+    flex-direction: column;
+}
