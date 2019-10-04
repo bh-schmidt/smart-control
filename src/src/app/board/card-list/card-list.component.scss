@@ -3,10 +3,6 @@
   margin: 5px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.2);
-
-  *:active{
-      cursor:move;
-  }
 }
 
 .card-list-title {
@@ -20,6 +16,7 @@
 }
 
 .card-list-itens {
+  min-height: 25px;
   display: flex;
   flex-direction: column;
 }
@@ -29,4 +26,9 @@
   height: 100px;
   border: 1px dashed black;
   margin: 10px;
+}
+
+.card-list-new-item {
+  background: red;
+  height: 100px;
 }

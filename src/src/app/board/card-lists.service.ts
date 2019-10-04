@@ -24,14 +24,6 @@ export class CardListsService {
                 {
                     title: 'Card 11',
                     description: 'Description'
-                },
-                {
-                    title: 'Card 12',
-                    description: 'Description'
-                },
-                {
-                    title: 'Card 13',
-                    description: 'Description'
                 }
             ]
         },

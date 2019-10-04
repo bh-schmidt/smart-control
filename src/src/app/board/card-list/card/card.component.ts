@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Card } from './card';
+import { AppService } from 'src/app/app.service';
 
 @Component({
     selector: 'app-card',
@@ -9,7 +10,7 @@ import { Card } from './card';
 export class CardComponent implements OnInit {
     @Input() card: Card
 
-    constructor() { }
+    constructor(private appService: AppService) { }
 
     ngOnInit() {
         if (!this.card) {
@@ -17,4 +18,7 @@ export class CardComponent implements OnInit {
         }
     }
 
+    mouseDown(){
+        this.appService.startDragCard();
+    }
 }

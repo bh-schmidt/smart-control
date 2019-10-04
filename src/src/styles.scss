@@ -3,12 +3,16 @@
     color: white;
 }
 
-html, body{
+html, body, .container-fluid{
     background: #444444 !important;
     height: 100%;
     width: 100%;
 }
 
-.container-fluid{
+.container-fluid {
     background: transparent;
+}
+
+.dragging *, .dragging {
+    cursor: grabbing !important;
 }
