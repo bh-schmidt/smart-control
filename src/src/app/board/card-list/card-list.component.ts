@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Card } from './card/card';
+import { Component, Input, OnInit } from '@angular/core';
+import { AppService } from 'src/app/app.service';
 import { CardList } from './card-list';
-import { CardListsService } from '../card-lists.service';
+import { Card } from './card/card';
 
 @Component({
     selector: 'app-card-list',
@@ -11,13 +11,18 @@ import { CardListsService } from '../card-lists.service';
 })
 export class CardListComponent implements OnInit {
     @Input() cardList: CardList
+    draggingClass = ''
 
-    constructor(private cardListsService: CardListsService) { }
+    constructor(private appService: AppService) { }
 
     ngOnInit() {
         if (!this.cardList) {
             throw "cardList input required";
         }
+
+        this.appService.dragging.subscribe(dragging => {
+            this.draggingClass = dragging ? 'dragging' : ''
+        })
     }
 
     dropCard(event: CdkDragDrop<Card[]>) {

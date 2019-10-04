@@ -3,7 +3,7 @@
         <h5>{{cardList.name}}</h5>
     </div>
 
-    <div cdkDropList [cdkDropListData]="cardList.cards" class="card-list-itens" (cdkDropListDropped)="drop($event)">
+    <div cdkDropList [cdkDropListData]="cardList.cards" class="card-list-itens {{draggingClass}}" (cdkDropListDropped)="drop($event)">
         <div *ngFor="let card of cardList.cards" cdkDrag>
             <app-card [card]='card'></app-card>
             <div *cdkDragPlaceholder class="card-list-placeholder"></div>

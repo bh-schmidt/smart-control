@@ -1,4 +1,6 @@
-.dragging > * {
-    cursor: grabbing !important;
-    background: black;
+.dragging {
+    * {
+        cursor: grabbing !important;
+        background: black;
+    }
 }

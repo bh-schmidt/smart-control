@@ -21,6 +21,10 @@
   flex-direction: column;
 }
 
+.dragging {
+  min-height: 120px;
+}
+
 .card-list-placeholder {
   background: gray;
   height: 100px;
