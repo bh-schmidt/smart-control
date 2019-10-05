@@ -1,9 +1,17 @@
 <div class="card-list">
-    <div class="card-list-title">
+    <div class="card-list-title" *ngIf='!updatingCardListName' (click)='onClickTitle()'>
         <h5>{{cardList.name}}</h5>
     </div>
 
-    <div cdkDropList [cdkDropListData]="cardList.cards" class="card-list-itens {{draggingClass}}" (cdkDropListDropped)="drop($event)">
+    <div class="card-list-title updating" [hidden]='!updatingCardListName'>
+        <form (submit)='onSubmit()'>
+            <input #listName name='listName' [(ngModel)]='cardListNameUpdating' class="form-control form-control-sm"
+                placeholder="List name" (blur)='onNameKeyDown()'>
+        </form>
+    </div>
+
+    <div cdkDropList [cdkDropListData]="cardList.cards" class="card-list-itens {{draggingClass}}"
+        (cdkDropListDropped)="drop($event)" [@changeDivState]='currentDraggingState'>
         <div *ngFor="let card of cardList.cards" cdkDrag>
             <app-card [card]='card'></app-card>
             <div *cdkDragPlaceholder class="card-list-placeholder"></div>

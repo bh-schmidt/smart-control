@@ -1,8 +1,9 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { CardList } from './card-list';
 import { Card } from './card/card';
+import { CardListsService } from '../card-lists.service';
 
 @Component({
     selector: 'app-card-list',
@@ -11,18 +12,19 @@ import { Card } from './card/card';
 })
 export class CardListComponent implements OnInit {
     @Input() cardList: CardList
-    draggingClass = ''
+    @ViewChild("listName", { static: true }) listName: ElementRef
 
-    constructor(private appService: AppService) { }
+    cardListNameUpdating: string = ''
+    updatingCardListName = false
+
+    constructor(private appService: AppService,
+        private cardListService: CardListsService,
+        private changeDetector: ChangeDetectorRef) { }
 
     ngOnInit() {
         if (!this.cardList) {
             throw "cardList input required";
         }
-
-        this.appService.dragging.subscribe(dragging => {
-            this.draggingClass = dragging ? 'dragging' : ''
-        })
     }
 
     dropCard(event: CdkDragDrop<Card[]>) {
@@ -37,6 +39,29 @@ export class CardListComponent implements OnInit {
                 event.container.data,
                 event.previousIndex,
                 event.currentIndex);
+        }
+    }
+
+    onClickTitle() {
+        this.cardListNameUpdating = this.cardList.name
+        this.updatingCardListName = true;
+        this.changeDetector.detectChanges();
+        this.listName.nativeElement.focus()
+    }
+
+    onNameKeyDown() {
+        this.updatingCardListName = false
+    }
+
+    onSubmit() {
+        if (!this.cardList || !this.cardListNameUpdating) {
+            return
+        }
+
+        var updated = this.cardListService.updateCardListName(this.cardList.guid, this.cardListNameUpdating)
+
+        if (updated) {
+            this.updatingCardListName = false
         }
     }
 }

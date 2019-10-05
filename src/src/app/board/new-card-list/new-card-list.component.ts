@@ -10,17 +10,15 @@ export class NewCardListComponent implements OnInit {
     listName: string = '';
 
     inv = true
-    
+
     constructor(private cardListService: CardListsService) { }
 
     ngOnInit() {
     }
 
-    invalid(){
-        console.log('a')
-    }
-
-    onSubmit(){
-        console.log(this.listName)
+    onSubmit(event: Event) {
+        event.preventDefault()
+        this.cardListService.addCardList(this.listName)
+        this.listName = ''
     }
 }

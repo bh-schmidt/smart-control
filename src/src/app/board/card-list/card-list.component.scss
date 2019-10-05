@@ -1,38 +1,38 @@
 .card-list {
-  width: 300px;
-  margin: 5px;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.2);
+    width        : 300px;
+    margin       : 5px;
+    border-radius: 5px;
+    background   : rgba(255, 255, 255, 0.2);
 }
 
 .card-list-title {
-  padding: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  cursor: pointer;
+    padding      : 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    cursor       : pointer;
 
-  h5 {
-    margin: 0;
-  }
+    h5 {
+        margin: 0;
+    }
+
+    &.updating {
+        padding: 16px;
+    }
 }
 
 .card-list-itens {
-  min-height: 25px;
-  display: flex;
-  flex-direction: column;
-}
-
-.dragging {
-  min-height: 120px;
+    display       : flex;
+    flex-direction: column;
+    min-height    : 10px;
 }
 
 .card-list-placeholder {
-  background: gray;
-  height: 100px;
-  border: 1px dashed black;
-  margin: 10px;
+    background: gray;
+    min-height    : 100px;
+    border    : 1px dashed black;
+    margin    : 10px;
 }
 
 .card-list-new-item {
-  background: red;
-  height: 100px;
+    background: red;
+    height    : 100px;
 }
