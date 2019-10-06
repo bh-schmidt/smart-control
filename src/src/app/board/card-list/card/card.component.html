@@ -1,7 +1,19 @@
-<div class="card-item" (mousedown)='mouseDown()' (mouseup)='mouseUp()'>
-    <div class="card-item-title">
-        <h5>{{card.title}}</h5>
-    </div>
+<div class="new-card">
+    <div class='new-card-forms'>
+        <form [noValidate]='false' (ngSubmit)='onSubmit($event)'>
+            <div class='new-card-title'>
+                <input [(ngModel)]='card.title' type="text" name='cardTitle' [required]='true' placeholder="Card title"
+                    class="form-control form-control-sm" autocomplete="off">
+            </div>
 
-    <div class="card-item-description">{{card.description}}</div>
+            <div class='new-card-description'>
+                <textarea [(ngModel)]='card.description' name="cardDescription" [required]='true' placeholder="Card description"
+                    class='form-control form-control-sm' cols="30" rows="10"></textarea>
+            </div>
+
+            <div class="new-card-buttons">
+                <button name='btnSubmit' type='submit' class="btn btn-sm btn-dark">Salvar</button>
+            </div>
+        </form>
+    </div>
 </div>

@@ -10,14 +10,13 @@
         </form>
     </div>
 
-    <div cdkDropList [cdkDropListData]="cardList.cards" class="card-list-itens {{draggingClass}}"
-        (cdkDropListDropped)="drop($event)" [@changeDivState]='currentDraggingState'>
+    <div cdkDropList [cdkDropListData]="cardList.cards" class="card-list-itens"
+        (cdkDropListDropped)="drop($event)">
         <div *ngFor="let card of cardList.cards" cdkDrag>
-            <app-card [card]='card'></app-card>
+            <app-view-card [card]='card'></app-view-card>
             <div *cdkDragPlaceholder class="card-list-placeholder"></div>
         </div>
     </div>
-    <div class="card-list-new-item">
 
-    </div>
+    <app-card [cardListGuid]='cardList?.guid'></app-card>
 </div>

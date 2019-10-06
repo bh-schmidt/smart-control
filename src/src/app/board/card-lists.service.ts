@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CardList } from './card-list/card-list';
 import { Guid } from 'guid-typescript';
+import { Card } from './card-list/card/card';
 
 @Injectable({
     providedIn: 'root'
@@ -12,10 +13,12 @@ export class CardListsService {
             name: 'List 1',
             cards: [
                 {
+                    guid: Guid.create(),
                     title: 'Card 1',
                     description: 'Description'
                 },
                 {
+                    guid: Guid.create(),
                     title: 'Card 2',
                     description: 'Description'
                 }
@@ -26,6 +29,7 @@ export class CardListsService {
             name: 'List 2',
             cards: [
                 {
+                    guid: Guid.create(),
                     title: 'Card 4',
                     description: 'Description'
                 }
@@ -36,6 +40,7 @@ export class CardListsService {
             name: 'List 3',
             cards: [
                 {
+                    guid: Guid.create(),
                     title: 'Card 7',
                     description: 'Description'
                 }
@@ -63,7 +68,7 @@ export class CardListsService {
             return false
         }
 
-        if (this.isThereAnotherCardListName(name,guid)){
+        if (this.isThereAnotherCardListName(name, guid)) {
             return false
         }
 
@@ -73,11 +78,62 @@ export class CardListsService {
             existingCardList.name = name
             return true
         }
-        
+
         return false
     }
 
-    isThereCardListName(name: string): boolean {
+    addCard(card: Card, listGuid: Guid): boolean {
+        if (!card) {
+            return false
+        }
+
+        if (this.isThereCardTitle(card.title)) {
+            return false
+        }
+
+        var cardList = this.getCardList(listGuid)
+
+        if (!cardList) {
+            return false
+        }
+
+        if (!cardList.cards) {
+            cardList.cards = []
+        }
+
+        cardList.cards.push({
+            ...card,
+            guid: Guid.create()
+        })
+        return true
+    }
+
+    private getCardList(listGuid: Guid): CardList {
+        if (!listGuid) {
+            return null
+        }
+
+        return this.cardLists.find(x => x.guid === listGuid)
+    }
+
+    private isThereCardTitle(title: string){
+        if (!title) {
+            return false
+        }
+        
+        return this.cardLists.some(list => list.cards.some(card => card.title === title))
+    }
+
+    private isThereAnotherCardTitle(title: string, listGuid: Guid): boolean {
+        if (!title || !listGuid) {
+            return false
+        }
+
+        return this.cardLists.some(list => 
+            list.guid !== listGuid && list.cards.some(card => card.title === title))
+    }
+
+    private isThereCardListName(name: string): boolean {
         if (!this.cardLists) {
             return false
         }
@@ -85,11 +141,11 @@ export class CardListsService {
         return this.cardLists.some(x => x.name === name)
     }
 
-    isThereAnotherCardListName(name: string, guid: Guid = Guid.createEmpty()): boolean {
+    private isThereAnotherCardListName(name: string, listGuid: Guid = Guid.createEmpty()): boolean {
         if (!this.cardLists) {
             return false
         }
 
-        return this.cardLists.some(x => x.name === name && x.guid !== guid)
+        return this.cardLists.some(x => x.name === name && x.guid !== listGuid)
     }
 }

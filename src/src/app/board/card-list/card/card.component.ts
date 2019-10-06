@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Guid } from 'guid-typescript';
+import { CardListsService } from '../../card-lists.service';
 import { Card } from './card';
-import { AppService } from 'src/app/app.service';
-import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
     selector: 'app-card',
@@ -10,34 +9,24 @@ import { debounceTime } from 'rxjs/operators';
     styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
-    @Input() card: Card
+    @Input() cardListGuid: Guid
+    card = new Card()
 
-    mouseUpped = false
-    clickSubject = new Subject<void>()
-
-    constructor(private appService: AppService) { 
-        this.clickSubject
-            .pipe(debounceTime(0))
-            .subscribe(() => {
-                console.log(this.mouseUpped)
-                if (!this.mouseUpped){
-                    this.appService.startDragCard();
-                }
-            })
-    }
+    constructor(private cardListService: CardListsService) { }
 
     ngOnInit() {
-        if (!this.card) {
-            throw "card input is required."
+        if(!this.cardListGuid){
+            throw 'cardListGuid is required.'
         }
     }
 
-    mouseDown() {
-        this.mouseUpped = false
-        this.clickSubject.next()
-    }
+    onSubmit(event: Event){
+        event.preventDefault()
+        
+        var added = this.cardListService.addCard(this.card,this.cardListGuid)
 
-    mouseUp(){
-        this.mouseUpped = true
+        if(added){
+            this.card = new Card()
+        }
     }
 }

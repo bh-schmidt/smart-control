@@ -6,6 +6,7 @@ import { CardComponent } from './card-list/card/card.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NewCardListComponent } from './new-card-list/new-card-list.component';
 import { FormsModule } from '@angular/forms';
+import { ViewCardComponent } from './card-list/view-card/view-card.component';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
         BoardComponent,
         CardListComponent,
         CardComponent,
-        NewCardListComponent
+        NewCardListComponent,
+        ViewCardComponent
     ]
 })
 export class BoardModule { }
