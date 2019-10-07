@@ -19,12 +19,12 @@
 
     >textarea{
         height: 50px;
-        transition: 50ms;
+        transition: 1000ms;
         resize: none;
         text-align: justify;
 
         &:focus{
-            height: 400px;
+            height: 200px;
         }
     }
 }

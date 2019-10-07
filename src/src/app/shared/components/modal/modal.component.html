@@ -1,5 +1,5 @@
 <div class="app-modal" (click)='close()' *ngIf='visible'>
-    <div class="app-modal-dialog">
+    <div class="app-modal-dialog {{getModalSizeClass()}}">
         <div class="app-modal-content" (click)='$event.stopPropagation()'>
             <ng-content></ng-content>
         </div>

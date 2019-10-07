@@ -1,6 +1,6 @@
 <div class="new-card">
     <div class='new-card-forms'>
-        <form [noValidate]='false' (ngSubmit)='onSubmit($event)'>
+        <form #form [noValidate]='false' (ngSubmit)='onSubmit($event)'>
             <div class='new-card-title'>
                 <input [(ngModel)]='card.title' type="text" name='cardTitle' [required]='true' placeholder="Card title"
                     class="form-control form-control-sm" autocomplete="off">
@@ -12,7 +12,7 @@
             </div>
 
             <div class="new-card-buttons">
-                <button name='btnSubmit' type='submit' class="btn btn-sm btn-dark">Salvar</button>
+                <button name='btnSubmit' type='submit' class="btn btn-sm btn-dark">Save</button>
             </div>
         </form>
     </div>

@@ -6,16 +6,14 @@
     <div class="card-list-title updating" [hidden]='!updatingCardListName'>
         <form (submit)='onSubmit()'>
             <input #listName name='listName' [(ngModel)]='cardListNameUpdating' class="form-control form-control-sm"
-                placeholder="List name" (blur)='onNameKeyDown()'>
+                placeholder="List name" (blur)='onNameKeyDown()' autocomplete="off">
         </form>
     </div>
 
     <div cdkDropList [cdkDropListData]="cardList.cards" class="card-list-itens" (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let card of cardList.cards">
-            <div (mouseup)='onCardMouseUp(card)' cdkDrag>
-                <app-view-card [card]='card'></app-view-card>
-                <div *cdkDragPlaceholder class="card-list-placeholder"></div>
-            </div>
+        <div *ngFor="let card of cardList.cards" cdkDrag (mouseup)='onCardMouseUp(card)'>
+            <app-view-card [card]='card'></app-view-card>
+            <div *cdkDragPlaceholder class="card-list-placeholder"></div>
         </div>
     </div>
 

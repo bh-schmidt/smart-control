@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } fr
 import { CardListsService } from '../card-lists.service';
 import { Card } from './card';
 import { CardList } from './card-list';
-import { EditCardComponent } from './view-card/edit-card/edit-card.component';
+import { EditCardComponent } from './edit-card/edit-card.component';
 
 @Component({
     selector: 'app-card-list',
@@ -28,11 +28,7 @@ export class CardListComponent implements OnInit {
         }
     }
 
-    dropCard(event: CdkDragDrop<Card[]>) {
-        moveItemInArray(this.cardList.cards, event.previousIndex, event.currentIndex);
-    }
-
-    drop(event: CdkDragDrop<string[]>) {
+    drop(event: CdkDragDrop<Card[]>) {
         if (event.previousContainer === event.container) {
             moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
         } else {

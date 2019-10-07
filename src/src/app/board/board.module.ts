@@ -7,7 +7,7 @@ import { NewCardListComponent } from './new-card-list/new-card-list.component';
 import { FormsModule } from '@angular/forms';
 import { ViewCardComponent } from './card-list/view-card/view-card.component';
 import { NewCardComponent } from './card-list/new-card/new-card.component';
-import { EditCardComponent } from './card-list/view-card/edit-card/edit-card.component';
+import { EditCardComponent } from './card-list/edit-card/edit-card.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({

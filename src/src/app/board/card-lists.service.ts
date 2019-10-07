@@ -34,17 +34,6 @@ export class CardListsService {
                     description: 'Description'
                 }
             ]
-        },
-        {
-            guid: Guid.create(),
-            name: 'List 3',
-            cards: [
-                {
-                    guid: Guid.create(),
-                    title: 'Card 7',
-                    description: 'Description'
-                }
-            ]
         }
     ]
 
@@ -108,6 +97,37 @@ export class CardListsService {
         return true
     }
 
+    updateCard(card: Card): boolean {
+        if (!card) {
+            return false
+        }
+
+        if (this.isThereAnotherCardTitle(card.title, card.guid)) {
+            return false
+        }
+
+        let existingCard = this.getCard(card.guid)
+
+        if(!existingCard){
+            return false
+        }
+
+        existingCard.title = card.title
+        existingCard.description = card.description
+
+        return true
+    }
+
+    private getCard(cardGuid: Guid) : Card{
+        if(!cardGuid){
+            return null
+        }
+
+        let list = this.cardLists.find(list => list.cards.some(card => card.guid === cardGuid))
+
+        return list.cards.find(card => card.guid === cardGuid)
+    }
+
     private getCardList(listGuid: Guid): CardList {
         if (!listGuid) {
             return null
@@ -116,21 +136,21 @@ export class CardListsService {
         return this.cardLists.find(x => x.guid === listGuid)
     }
 
-    private isThereCardTitle(title: string){
+    private isThereCardTitle(title: string) {
         if (!title) {
             return false
         }
-        
+
         return this.cardLists.some(list => list.cards.some(card => card.title === title))
     }
 
-    private isThereAnotherCardTitle(title: string, listGuid: Guid): boolean {
-        if (!title || !listGuid) {
+    private isThereAnotherCardTitle(title: string, cardGuid: Guid): boolean {
+        if (!title || !cardGuid) {
             return false
         }
 
-        return this.cardLists.some(list => 
-            list.guid !== listGuid && list.cards.some(card => card.title === title))
+        return this.cardLists.some(list =>
+            list.cards.some(card => card.title === title && card.guid !== cardGuid))
     }
 
     private isThereCardListName(name: string): boolean {

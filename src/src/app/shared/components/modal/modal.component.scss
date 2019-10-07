@@ -4,6 +4,8 @@
     left      : 0;
     height    : 100%;
     width     : 100%;
+    max-height: 100%;
+    max-width : 100%;
     z-index   : 1000;
     background: rgba(0, 0, 0, .8);
 }
@@ -11,17 +13,31 @@
 .app-modal-dialog {
     position      : relative;
     margin        : 1.75rem auto;
-    width         : auto;
     max-width     : 80%;
     min-height    : calc(100% - 3.50rem);
     display       : flex;
     flex-direction: row;
     align-items   : center;
+
+    &.app-modal-sm {
+        width: 40%;
+    }
+
+    &.app-modal-md {
+        width: 60%;
+    }
+
+    &.app-modal-lg {
+        width: 80%;
+    }
 }
 
 .app-modal-content {
-    background   : #444444;
-    border-radius: 5px;
-    padding      : 10px;
-    width        : 100%;
+    background    : #444444;
+    border-radius : 5px;
+    padding       : 20px;
+    width         : 100%;
+    display       : flex;
+    flex-direction: column;
+    max-height    : 100%;
 }
