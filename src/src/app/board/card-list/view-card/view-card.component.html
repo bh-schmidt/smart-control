@@ -1,7 +1,12 @@
 <div class="card-item" (mousedown)='mouseDown()'>
+    <span class="card-item-delete" (click)='deleteCard();' stop-propagation-click stop-propagation-mousedown
+        stop-propagation-mouseup>×</span>
+
     <div class="card-item-title">
         <h5>{{card.title}}</h5>
     </div>
 
     <div class="card-item-description">{{card.description}}</div>
 </div>
+
+<app-delete-card #deleteCardComponent></app-delete-card>

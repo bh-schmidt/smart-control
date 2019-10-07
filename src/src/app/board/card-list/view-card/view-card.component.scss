@@ -17,3 +17,10 @@
   white-space: nowrap;
   overflow: hidden;
 }
+
+.card-item-delete {
+    float    : right;
+    font-size: 16pt;
+    cursor   : pointer;
+    line-height: 1;
+}

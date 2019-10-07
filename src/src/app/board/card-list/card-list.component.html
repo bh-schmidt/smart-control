@@ -1,6 +1,6 @@
 <div class="card-list">
     <div class="card-list-title" *ngIf='!updatingCardListName' (click)='onClickTitle()'>
-        <span class="card-list-delete" (click)='deleteCardList(); $event.stopPropagation();'>×</span>
+        <span class="card-list-delete" stop-propagation-click (click)='deleteCardList();'>×</span>
         <h5>{{cardList.name}}</h5>
     </div>
 

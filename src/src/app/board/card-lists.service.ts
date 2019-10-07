@@ -71,8 +71,8 @@ export class CardListsService {
         return false
     }
 
-    deleteCardList(listGuid: Guid) : boolean{
-        if(!listGuid){
+    deleteCardList(listGuid: Guid): boolean {
+        if (!listGuid) {
             return false
         }
 
@@ -117,7 +117,7 @@ export class CardListsService {
 
         let existingCard = this.getCard(card.guid)
 
-        if(!existingCard){
+        if (!existingCard) {
             return false
         }
 
@@ -127,12 +127,46 @@ export class CardListsService {
         return true
     }
 
-    private getCard(cardGuid: Guid) : Card{
-        if(!cardGuid){
+    deleteCard(card: Card): boolean {
+        if (!card) {
+            return false
+        }
+
+        var cardList = this.getCardListByCardGuid(card.guid)
+
+        if (!cardList) {
+            return false
+        }
+
+        this.removeItemFromArray<Card>(cardList.cards, c => c.guid === card.guid)
+        return true
+    }
+
+    private removeItemFromArray<TItem>(array: TItem[], predicate: (item: TItem) => boolean) {
+        if (!predicate || !array) {
+            return
+        }
+
+        const item = array.find(predicate)
+
+        if (!item) {
+            return
+        }
+
+        const index = array.indexOf(item)
+        array.splice(index, 1)
+    }
+
+    private getCard(cardGuid: Guid): Card {
+        if (!cardGuid) {
             return null
         }
 
-        let list = this.cardLists.find(list => list.cards.some(card => card.guid === cardGuid))
+        let list = this.getCardListByCardGuid(cardGuid)
+
+        if (!list) {
+            return null
+        }
 
         return list.cards.find(card => card.guid === cardGuid)
     }
@@ -143,6 +177,14 @@ export class CardListsService {
         }
 
         return this.cardLists.find(x => x.guid === listGuid)
+    }
+
+    private getCardListByCardGuid(cardGuid: Guid): CardList {
+        if (!cardGuid) {
+            return null
+        }
+
+        return this.cardLists.find(list => list.cards.some(card => card.guid === cardGuid))
     }
 
     private isThereCardTitle(title: string) {
