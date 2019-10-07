@@ -1,6 +1,10 @@
 <div class="app-modal" (click)='close()' *ngIf='visible'>
     <div class="app-modal-dialog {{getModalSizeClass()}}">
         <div class="app-modal-content" (click)='$event.stopPropagation()'>
+            <div class="app-modal-header">
+                <span class="app-modal-header-close" (click)='close()'>×</span>
+                <h4>{{modalTitle}}</h4>
+            </div>
             <ng-content></ng-content>
         </div>
     </div>

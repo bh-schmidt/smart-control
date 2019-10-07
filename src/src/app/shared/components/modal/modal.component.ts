@@ -7,6 +7,7 @@ import { ModalSize } from './modal-size.enum';
     styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
+    @Input() modalTitle: string
     @Input() modalSize: ModalSize
     @Output() onClose = new EventEmitter();
 
@@ -16,14 +17,14 @@ export class ModalComponent implements OnInit {
 
     ngOnInit() { }
 
-    getModalSizeClass(){
+    getModalSizeClass() {
         switch (this.modalSize) {
             case ModalSize.small:
                 return 'app-modal-sm'
 
             case ModalSize.medium:
                 return 'app-modal-md'
-            
+
             case ModalSize.large:
                 return 'app-modal-lg'
             default:

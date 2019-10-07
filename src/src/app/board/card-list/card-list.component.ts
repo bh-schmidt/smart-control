@@ -4,6 +4,7 @@ import { CardListsService } from '../card-lists.service';
 import { Card } from './card';
 import { CardList } from './card-list';
 import { EditCardComponent } from './edit-card/edit-card.component';
+import { DeleteCardListComponent } from './delete-card-list/delete-card-list.component';
 
 @Component({
     selector: 'app-card-list',
@@ -13,7 +14,8 @@ import { EditCardComponent } from './edit-card/edit-card.component';
 export class CardListComponent implements OnInit {
     @Input() cardList: CardList
     @ViewChild("listName", { static: true }) listName: ElementRef
-    @ViewChild("editCard", {static: false}) editCardComponent : EditCardComponent
+    @ViewChild("editCardComponent", { static: false }) editCardComponent: EditCardComponent
+    @ViewChild("deleteCardListComponent",{static:false}) deleteCardListComponent: DeleteCardListComponent
 
     cardListNameUpdating: string = ''
     updatingCardListName = false
@@ -62,7 +64,11 @@ export class CardListComponent implements OnInit {
         }
     }
 
-    onCardMouseUp(card: Card){
+    onCardMouseUp(card: Card) {
         this.editCardComponent.show(card);
+    }
+
+    deleteCardList() {
+        this.deleteCardListComponent.show(this.cardList)
     }
 }

@@ -9,6 +9,7 @@ import { ViewCardComponent } from './card-list/view-card/view-card.component';
 import { NewCardComponent } from './card-list/new-card/new-card.component';
 import { EditCardComponent } from './card-list/edit-card/edit-card.component';
 import { SharedModule } from '../shared/shared.module';
+import { DeleteCardListComponent } from './card-list/delete-card-list/delete-card-list.component';
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import { SharedModule } from '../shared/shared.module';
         NewCardListComponent,
         ViewCardComponent,
         NewCardComponent,
-        EditCardComponent
+        EditCardComponent,
+        DeleteCardListComponent
     ]
 })
 export class BoardModule { }

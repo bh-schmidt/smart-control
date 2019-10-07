@@ -71,6 +71,15 @@ export class CardListsService {
         return false
     }
 
+    deleteCardList(listGuid: Guid) : boolean{
+        if(!listGuid){
+            return false
+        }
+
+        this.cardLists = this.cardLists.filter(list => list.guid !== listGuid)
+        return true
+    }
+
     addCard(card: Card, listGuid: Guid): boolean {
         if (!card) {
             return false

@@ -1,5 +1,6 @@
 <div class="card-list">
     <div class="card-list-title" *ngIf='!updatingCardListName' (click)='onClickTitle()'>
+        <span class="card-list-delete" (click)='deleteCardList(); $event.stopPropagation();'>×</span>
         <h5>{{cardList.name}}</h5>
     </div>
 
@@ -20,4 +21,5 @@
     <app-new-card [cardListGuid]='cardList?.guid'></app-new-card>
 </div>
 
-<app-edit-card #editCard></app-edit-card>
+<app-edit-card #editCardComponent></app-edit-card>
+<app-delete-card-list #deleteCardListComponent></app-delete-card-list>
