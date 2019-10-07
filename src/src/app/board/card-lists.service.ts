@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CardList } from './card-list/card-list';
 import { Guid } from 'guid-typescript';
-import { Card } from './card-list/card/card';
+import { Card } from './card-list/card';
 
 @Injectable({
     providedIn: 'root'

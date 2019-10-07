@@ -10,13 +10,16 @@
         </form>
     </div>
 
-    <div cdkDropList [cdkDropListData]="cardList.cards" class="card-list-itens"
-        (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let card of cardList.cards" cdkDrag>
-            <app-view-card [card]='card'></app-view-card>
-            <div *cdkDragPlaceholder class="card-list-placeholder"></div>
+    <div cdkDropList [cdkDropListData]="cardList.cards" class="card-list-itens" (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let card of cardList.cards">
+            <div (mouseup)='onCardMouseUp(card)' cdkDrag>
+                <app-view-card [card]='card'></app-view-card>
+                <div *cdkDragPlaceholder class="card-list-placeholder"></div>
+            </div>
         </div>
     </div>
 
-    <app-card [cardListGuid]='cardList?.guid'></app-card>
+    <app-new-card [cardListGuid]='cardList?.guid'></app-new-card>
 </div>
+
+<app-edit-card #editCard></app-edit-card>

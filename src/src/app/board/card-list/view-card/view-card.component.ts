@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { Card } from '../card/card';
+import { Card } from '../card';
 
 @Component({
     selector: 'app-view-card',
@@ -20,9 +20,5 @@ export class ViewCardComponent implements OnInit {
 
     mouseDown() {
         this.appService.startDragCard();
-    }
-
-    mouseUp() {
-        
     }
 }

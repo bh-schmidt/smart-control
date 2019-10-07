@@ -1,0 +1,15 @@
+<app-modal #modal>
+    <div>
+        <form>
+            <div class="form-group">
+                <label for='title' >Title</label>
+                <input id='title' name='title' [(ngModel)]='card.title' type="text" class="form-control form-control-lg" placeholder="Title" autocomplete="false">
+            </div>
+
+            <div class="form-group">
+                <label for='description'>Description</label>
+                <textarea id='description' name='description' [(ngModel)]='card.description' class="form-control form-control-lg" placeholder="Description"></textarea>
+            </div>
+        </form>
+    </div>
+</app-modal>

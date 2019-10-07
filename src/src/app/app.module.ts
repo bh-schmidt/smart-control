@@ -18,6 +18,8 @@ import { BoardModule } from './board/board.module';
   providers: [
       AppService
   ],
+  exports:[
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
