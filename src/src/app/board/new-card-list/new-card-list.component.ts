@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CardListsService } from '../card-lists.service';
+import { CardListsService } from '../card-list/card-lists.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

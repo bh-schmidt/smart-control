@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CardListsService } from 'src/app/board/card-lists.service';
+import { CardListsService } from 'src/app/board/card-list/card-lists.service';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { Card } from '../card';
+import { Card } from '../../card';
 import { ModalSize } from 'src/app/shared/components/modal/modal-size.enum';
 import { ToastrService } from 'ngx-toastr';
+import { CardService } from '../card.service';
 
 @Component({
     selector: 'app-edit-card',
@@ -18,7 +19,7 @@ export class EditCardComponent implements OnInit {
     visible = false
 
     constructor(
-        private cardListService: CardListsService,
+        private cardService: CardService,
         private toastrService: ToastrService) { }
 
     ngOnInit() { }
@@ -28,7 +29,7 @@ export class EditCardComponent implements OnInit {
             return
         }
 
-        let updated = this.cardListService.updateCard(this.card)
+        let updated = this.cardService.updateCard(this.card)
 
         if (!updated) {
             this.toastrService.error('There is another card with the same card title.')

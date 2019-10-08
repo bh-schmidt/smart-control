@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import { Card } from '../card';
+import { Card } from '../../card';
 import { CardListsService } from '../../card-lists.service';
 import { DeleteCardComponent } from '../delete-card/delete-card.component';
 

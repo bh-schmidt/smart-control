@@ -1,9 +1,9 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { CardListsService } from '../card-lists.service';
+import { CardListsService } from './card-lists.service';
 import { Card } from './card';
 import { CardList } from './card-list';
-import { EditCardComponent } from './edit-card/edit-card.component';
+import { EditCardComponent } from './card/edit-card/edit-card.component';
 import { DeleteCardListComponent } from './delete-card-list/delete-card-list.component';
 import { ToastrService } from 'ngx-toastr';
 

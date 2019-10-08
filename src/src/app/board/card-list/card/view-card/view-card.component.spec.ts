@@ -7,8 +7,8 @@ import { ViewCardComponent } from './view-card.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { BoardModule } from '../../board.module';
-import { Card } from '../card';
+import { BoardModule } from '../../../board.module';
+import { Card } from '../../card';
 
 describe('ViewCardComponent', () => {
     let component: ViewCardComponent;

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CardListsService } from './card-lists.service';
+import { CardListsService } from './card-list/card-lists.service';
 
 @Component({
     selector: 'app-board',
     templateUrl: './board.component.html',
-    styleUrls: ['./board.component.scss'],
-    providers: [CardListsService]
+    styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
 

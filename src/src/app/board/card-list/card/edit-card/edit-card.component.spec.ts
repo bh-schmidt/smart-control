@@ -3,13 +3,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { DeleteCardComponent } from './delete-card.component';
-import { BoardModule } from '../../board.module';
+import { EditCardComponent } from './edit-card.component';
+import { BoardModule } from '../../../board.module';
 import { ToastrModule } from 'ngx-toastr';
 
-describe('DeleteCardComponent', () => {
-  let component: DeleteCardComponent;
-  let fixture: ComponentFixture<DeleteCardComponent>;
+describe('EditCardComponent', () => {
+  let component: EditCardComponent;
+  let fixture: ComponentFixture<EditCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -19,7 +19,7 @@ describe('DeleteCardComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteCardComponent);
+    fixture = TestBed.createComponent(EditCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

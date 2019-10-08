@@ -8,7 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { Guid } from 'guid-typescript';
-import { BoardModule } from '../../board.module';
+import { BoardModule } from '../../../board.module';
 
 describe('NewCardComponent', () => {
     let component: NewCardComponent;

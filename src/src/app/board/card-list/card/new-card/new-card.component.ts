@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Guid } from 'guid-typescript';
-import { Card } from '../card';
-import { CardListsService } from '../../card-lists.service';
+import { Card } from '../../card';
 import { ToastrService } from 'ngx-toastr';
+import { CardService } from '../card.service';
 
 @Component({
     selector: 'app-new-card',
@@ -14,7 +14,7 @@ export class NewCardComponent implements OnInit {
     card = new Card()
 
     constructor(
-        private cardListService: CardListsService,
+        private cardService: CardService,
         private toastrService: ToastrService) { }
 
     ngOnInit() {
@@ -30,7 +30,7 @@ export class NewCardComponent implements OnInit {
             return
         }
 
-        var added = this.cardListService.addCard(this.card, this.cardListGuid)
+        var added = this.cardService.addCard(this.card, this.cardListGuid)
 
         if (!added) {
             this.toastrService.error('There is another card with the same name.')
