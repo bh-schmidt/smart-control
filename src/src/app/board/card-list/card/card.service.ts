@@ -7,10 +7,10 @@ import { Guid } from 'guid-typescript';
     providedIn: 'root'
 })
 export class CardService {
-    constructor(private cardListService: CardListsService) { }
+    constructor(public cardListService: CardListsService) { }
 
     addCard(card: Card, listGuid: Guid): boolean {
-        if (!card) {
+        if (!card || !listGuid) {
             return false
         }
 
@@ -86,20 +86,20 @@ export class CardService {
         return cardList.cards.find(card => card.guid === cardGuid)
     }
 
-    private isThereCardTitle(title: string) {
+    isThereCardTitle(title: string) {
         if (!title) {
             return false
         }
 
         let cardLists = this.cardListService.getCardLists();
 
-        if(!cardLists){
+        if (!cardLists) {
             return false
         }
 
         return cardLists.some(list => list.cards.some(card => card.title === title))
     }
-    
+
     private isThereAnotherCardTitle(title: string, cardGuid: Guid): boolean {
         if (!title || !cardGuid) {
             return false
@@ -107,7 +107,7 @@ export class CardService {
 
         let cardLists = this.cardListService.getCardLists();
 
-        if(!cardLists){
+        if (!cardLists) {
             return false
         }
 
@@ -115,7 +115,7 @@ export class CardService {
             list.cards.some(card => card.title === title && card.guid !== cardGuid))
     }
 
-    
+
 
     private removeItemFromArray<TItem>(array: TItem[], predicate: (item: TItem) => boolean) {
         if (!predicate || !array) {
