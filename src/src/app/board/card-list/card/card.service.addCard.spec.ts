@@ -6,7 +6,7 @@ import { Card } from '../card';
 import { CardListsService } from '../card-lists.service';
 import { CardService } from './card.service';
 
-describe('Service: Card', () => {
+describe('CardService.addCard', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [CardService, CardListsService]
