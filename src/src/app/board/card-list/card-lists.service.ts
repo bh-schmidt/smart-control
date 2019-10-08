@@ -7,35 +7,7 @@ import { Card } from './card';
     providedIn: 'root'
 })
 export class CardListsService {
-    cardLists: CardList[] = [
-        {
-            guid: Guid.create(),
-            name: 'List 1',
-            cards: [
-                {
-                    guid: Guid.create(),
-                    title: 'Card 1',
-                    description: 'Description'
-                },
-                {
-                    guid: Guid.create(),
-                    title: 'Card 2',
-                    description: 'Description'
-                }
-            ]
-        },
-        {
-            guid: Guid.create(),
-            name: 'List 2',
-            cards: [
-                {
-                    guid: Guid.create(),
-                    title: 'Card 4',
-                    description: 'Description'
-                }
-            ]
-        }
-    ]
+    cardLists: CardList[] = []
 
     constructor() { }
 

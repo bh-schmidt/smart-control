@@ -86,7 +86,7 @@ export class CardService {
         return cardList.cards.find(card => card.guid === cardGuid)
     }
 
-    isThereCardTitle(title: string) {
+    private isThereCardTitle(title: string) {
         if (!title) {
             return false
         }

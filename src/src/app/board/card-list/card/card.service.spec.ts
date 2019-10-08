@@ -20,14 +20,15 @@ describe('Service: Card', () => {
             name: 'Card List'
         }
         let card = new Card()
+        card.title = 'title'
 
-        spyOn(cardService, "isThereCardTitle").and.returnValue(false)
+        spyOn(cardService.cardListService, 'getCardLists').and.returnValue([])
         spyOn(cardService.cardListService, "getCardList").and.returnValue(cardList)
 
         let result = cardService.addCard(card, cardList.guid)
 
         expect(result).toEqual(true)
-        expect(cardService.isThereCardTitle).toHaveBeenCalled()
+        expect(cardService.cardListService.getCardLists).toHaveBeenCalled()
         expect(cardService.cardListService.getCardList).toHaveBeenCalled()
     }))
 
@@ -37,15 +38,17 @@ describe('Service: Card', () => {
             cards: null,
             name: 'Card List'
         }
-        let card = new Card()
 
-        spyOn(cardService, "isThereCardTitle").and.returnValue(false)
+        let card = new Card()
+        card.title = 'title'
+
+        spyOn(cardService.cardListService, 'getCardLists').and.returnValue([])
         spyOn(cardService.cardListService, "getCardList").and.returnValue(cardList)
 
         let result = cardService.addCard(card, cardList.guid)
 
         expect(result).toEqual(true)
-        expect(cardService.isThereCardTitle).toHaveBeenCalled()
+        expect(cardService.cardListService.getCardLists).toHaveBeenCalled()
         expect(cardService.cardListService.getCardList).toHaveBeenCalled()
     }))
 
@@ -61,32 +64,41 @@ describe('Service: Card', () => {
         expect(result).toEqual(false)
     }))
 
+    it('should return false because title is null or empty', inject([CardService], (cardService: CardService) => {
+        let result = cardService.addCard(new Card(), Guid.create())
+
+        expect(result).toEqual(false)
+    }))
+
     it('should return false because there is another card with the same title', inject([CardService], (cardService: CardService) => {
         let card = new Card()
+        card.title = 'title'
+
         const cardList = {
             guid: Guid.create(),
             cards: [],
             name: 'Card List'
         }
 
-        spyOn(cardService, "isThereCardTitle").and.returnValue(true)
+        spyOn(cardService.cardListService, 'getCardLists').and.returnValue([])
 
         let result = cardService.addCard(card, cardList.guid)
 
         expect(result).toEqual(false)
-        expect(cardService.isThereCardTitle).toHaveBeenCalled()
+        expect(cardService.cardListService.getCardLists).toHaveBeenCalled()
     }))
 
     it('should return false because card not finded.', inject([CardService], (cardService: CardService) => {
         let card = new Card()
+        card.title = 'title'
 
-        spyOn(cardService, "isThereCardTitle").and.returnValue(false)
+        spyOn(cardService.cardListService, "getCardLists").and.returnValue([])
         spyOn(cardService.cardListService, "getCardList").and.returnValue(null)
 
         let result = cardService.addCard(card, Guid.create())
 
         expect(result).toEqual(false)
-        expect(cardService.isThereCardTitle).toHaveBeenCalled()
+        expect(cardService.cardListService.getCardLists).toHaveBeenCalled()
         expect(cardService.cardListService.getCardList).toHaveBeenCalled()
     }))
 });
