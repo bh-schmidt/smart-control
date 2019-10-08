@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { EditCardComponent } from './edit-card.component';
+import { BoardModule } from '../../board.module';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('EditCardComponent', () => {
   let component: EditCardComponent;
@@ -11,7 +13,7 @@ describe('EditCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditCardComponent ]
+        imports: [BoardModule, ToastrModule.forRoot()]
     })
     .compileComponents();
   }));

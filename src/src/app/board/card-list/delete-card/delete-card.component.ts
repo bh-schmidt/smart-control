@@ -14,7 +14,7 @@ export class DeleteCardComponent implements OnInit {
     @ViewChild("modal", { static: false }) modal: ModalComponent
 
     card: Card
-    modalSize: ModalSize = ModalSize.medium
+    public modalSize: ModalSize = ModalSize.medium
     modalTitle = 'Delete card'
 
     constructor(

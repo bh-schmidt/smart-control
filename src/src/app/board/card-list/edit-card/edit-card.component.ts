@@ -14,7 +14,7 @@ export class EditCardComponent implements OnInit {
     @ViewChild("modal", { static: false }) modal: ModalComponent
     card: Card = new Card();
 
-    modalSize = ModalSize.large
+    public modalSize = ModalSize.large
     visible = false
 
     constructor(

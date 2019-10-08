@@ -8,7 +8,7 @@ import { ModalSize } from './modal-size.enum';
 })
 export class ModalComponent implements OnInit {
     @Input() modalTitle: string
-    @Input() modalSize: ModalSize
+    @Input() public modalSize: ModalSize
     @Output() onClose = new EventEmitter();
 
     visible = false;
