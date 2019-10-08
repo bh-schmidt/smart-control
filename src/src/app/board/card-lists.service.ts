@@ -39,17 +39,18 @@ export class CardListsService {
 
     constructor() { }
 
-    addCardList(cardListName: string) {
+    addCardList(cardListName: string): boolean {
         if (!this.cardLists) {
             this.cardLists = []
         }
 
         if (this.isThereCardListName(cardListName)) {
-            //do error here
-            return
+            return false
         }
 
         this.cardLists.push(new CardList({ guid: Guid.create(), name: cardListName }))
+
+        return true
     }
 
     updateCardListName(guid: Guid, name: string) {

@@ -3,6 +3,7 @@ import { CardListsService } from 'src/app/board/card-lists.service';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { Card } from '../card';
 import { ModalSize } from 'src/app/shared/components/modal/modal-size.enum';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-edit-card',
@@ -16,19 +17,28 @@ export class EditCardComponent implements OnInit {
     modalSize = ModalSize.large
     visible = false
 
-    constructor(private cardListService: CardListsService) { }
+    constructor(
+        private cardListService: CardListsService,
+        private toastrService: ToastrService) { }
 
     ngOnInit() { }
 
     onSaveClick() {
-        let updated = this.cardListService.updateCard(this.card)
-        
-        if(updated){
-            this.modal.hide()
+        if(!this.isValid()){
+            return
         }
+
+        let updated = this.cardListService.updateCard(this.card)
+
+        if (!updated) {
+            this.toastrService.error('There is another card with the same card title.')
+            return
+        }
+
+        this.modal.hide()
     }
 
-    onCancelClick(){
+    onCancelClick() {
         this.modal.hide()
     }
 
@@ -37,7 +47,21 @@ export class EditCardComponent implements OnInit {
             throw "card is required"
         }
 
-        this.card = {...card};
+        this.card = { ...card };
         this.modal.show()
+    }
+
+    private isValid(): boolean {
+        if (!this.card.title) {
+            this.toastrService.error('The card title is required.')
+            return false
+        }
+
+        if (!this.card.description) {
+            this.toastrService.error('The card description is required.')
+            return false
+        }
+
+        return true
     }
 }

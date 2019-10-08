@@ -3,6 +3,7 @@ import { Card } from '../card';
 import { ModalSize } from 'src/app/shared/components/modal/modal-size.enum';
 import { CardListsService } from '../../card-lists.service';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-delete-card',
@@ -16,7 +17,9 @@ export class DeleteCardComponent implements OnInit {
     modalSize: ModalSize = ModalSize.medium
     modalTitle = 'Delete card'
 
-    constructor(private cardListsService: CardListsService) { }
+    constructor(
+        private cardListsService: CardListsService,
+        private toastrService: ToastrService) { }
 
     ngOnInit() {
     }
@@ -25,20 +28,23 @@ export class DeleteCardComponent implements OnInit {
         if (!card) {
             throw "card is required";
         }
-        
+
         this.card = card
         this.modal.show()
     }
 
     deleteCard() {
         let deleted = this.cardListsService.deleteCard(this.card)
-        
-        if(deleted){
-            this.modal.hide()
+
+        if (!deleted) {
+            this.toastrService.error('There was an error while deleting the card.')
+            return
         }
+
+        this.modal.hide()
     }
 
-    onCancel(){
+    onCancel() {
         this.modal.hide()
     }
 }
