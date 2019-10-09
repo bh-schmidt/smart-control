@@ -13,7 +13,24 @@ describe('CardListService.getCardLists', () => {
         service.addCardList('Card List 3')
     })
 
-    it('should ', inject([CardListsService], (cardService: CardListsService) => {
-        
+    it('should insert the card list', inject([CardListsService], (service: CardListsService) => {
+        var added = service.addCardList('Card List 4')
+
+        expect(added).toEqual(true)
+        expect(service.getCardLists().length).toEqual(4)
+    }))
+
+    it('should return false because list is null', inject([CardListsService], (service: CardListsService) => {
+        var added = service.addCardList(null)
+
+        expect(added).toEqual(false)
+        expect(service.getCardLists().length).toEqual(3)
+    }))
+
+    it('should return false because there is another list with same name', inject([CardListsService], (service: CardListsService) => {
+        var added = service.addCardList('Card List 3')
+
+        expect(added).toEqual(false)
+        expect(service.getCardLists().length).toEqual(3)
     }))
 })

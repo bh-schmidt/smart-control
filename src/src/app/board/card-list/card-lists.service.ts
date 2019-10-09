@@ -24,6 +24,10 @@ export class CardListsService {
     }
 
     addCardList(cardListName: string): boolean {
+        if(!cardListName){
+            return false
+        }
+
         if (!this.cardLists) {
             this.cardLists = []
         }
