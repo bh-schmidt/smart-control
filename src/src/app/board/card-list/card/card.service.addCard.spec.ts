@@ -13,7 +13,7 @@ describe('CardService.addCard', () => {
         });
     });
 
-    it('should return true', inject([CardService], (cardService: CardService) => {
+    it('should return create the card', inject([CardService], (cardService: CardService) => {
         const cardList = {
             guid: Guid.create(),
             cards: [],
@@ -28,6 +28,7 @@ describe('CardService.addCard', () => {
         let result = cardService.addCard(card, cardList.guid)
 
         expect(result).toEqual(true)
+        expect(cardList.cards.length).toEqual(1)
         expect(cardService.cardListService.getCardLists).toHaveBeenCalled()
         expect(cardService.cardListService.getCardList).toHaveBeenCalled()
     }))
@@ -48,6 +49,7 @@ describe('CardService.addCard', () => {
         let result = cardService.addCard(card, cardList.guid)
 
         expect(result).toEqual(true)
+        expect(cardList.cards.length).toEqual(1)
         expect(cardService.cardListService.getCardLists).toHaveBeenCalled()
         expect(cardService.cardListService.getCardList).toHaveBeenCalled()
     }))
@@ -85,10 +87,11 @@ describe('CardService.addCard', () => {
         let result = cardService.addCard(card, cardList.guid)
 
         expect(result).toEqual(false)
+        expect(cardList.cards.length).toEqual(0)
         expect(cardService.cardListService.getCardLists).toHaveBeenCalled()
     }))
 
-    it('should return false because card not finded.', inject([CardService], (cardService: CardService) => {
+    it('should return false because card not found', inject([CardService], (cardService: CardService) => {
         let card = new Card()
         card.title = 'title'
 

@@ -37,7 +37,7 @@ export class CardService {
     }
 
     updateCard(card: Card): boolean {
-        if (!card) {
+        if (!card || !card.guid || !card.title || !card.description) {
             return false
         }
 
@@ -77,7 +77,7 @@ export class CardService {
             return null
         }
 
-        let cardList = this.cardListService.getCardListByCardGuid(cardGuid)
+        const cardList = this.cardListService.getCardListByCardGuid(cardGuid)
 
         if (!cardList || !cardList.cards) {
             return null
@@ -112,7 +112,7 @@ export class CardService {
         }
 
         return cardLists.some(list =>
-            list.cards.some(card => card.title === title && card.guid !== cardGuid))
+            list.cards && list.cards.some(card => card && card.title === title && card.guid !== cardGuid))
     }
 
     private removeItemFromArray<TItem>(array: TItem[], predicate: (item: TItem) => boolean) {
