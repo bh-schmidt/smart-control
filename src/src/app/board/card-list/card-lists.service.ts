@@ -7,7 +7,7 @@ import { Card } from './card';
     providedIn: 'root'
 })
 export class CardListsService {
-    cardLists: CardList[] = []
+    private cardLists: CardList[] = []
 
     constructor() { }
 

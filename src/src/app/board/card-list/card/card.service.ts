@@ -7,7 +7,7 @@ import { Guid } from 'guid-typescript';
     providedIn: 'root'
 })
 export class CardService {
-    constructor(public cardListService: CardListsService) { }
+    constructor(private cardListService: CardListsService) { }
 
     addCard(card: Card, listGuid: Guid): boolean {
         if (!card || !listGuid) {

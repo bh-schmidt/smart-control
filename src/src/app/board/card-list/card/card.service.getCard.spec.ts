@@ -4,10 +4,14 @@ import { CardListsService } from '../card-lists.service';
 import { CardService } from './card.service';
 
 describe('CardService.getCard', () => {
+    let cardListService: CardListsService
+
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [CardService, CardListsService]
         });
+
+        cardListService = TestBed.get(CardListsService)
     });
 
     it('should return the card', inject([CardService], (service: CardService) => {
@@ -24,12 +28,12 @@ describe('CardService.getCard', () => {
             ]
         }
 
-        spyOn(service.cardListService, 'getCardListByCardGuid').and.returnValue(cardList)
+        spyOn(cardListService, 'getCardListByCardGuid').and.returnValue(cardList)
 
         const card = service.getCard(cardGuid)
 
         expect(card).toEqual(cardList.cards[0])
-        expect(service.cardListService.getCardListByCardGuid).toHaveBeenCalled()
+        expect(cardListService.getCardListByCardGuid).toHaveBeenCalled()
     }))
 
     it('should return null because guid is null', inject([CardService], (service: CardService) => {
@@ -41,12 +45,12 @@ describe('CardService.getCard', () => {
     it('should return null because the cardList was null', inject([CardService], (service: CardService) => {
         const cardGuid = Guid.create()
 
-        spyOn(service.cardListService, 'getCardListByCardGuid').and.returnValue(null)
+        spyOn(cardListService, 'getCardListByCardGuid').and.returnValue(null)
 
         const card = service.getCard(cardGuid)
 
         expect(card).toEqual(null)
-        expect(service.cardListService.getCardListByCardGuid).toHaveBeenCalled()
+        expect(cardListService.getCardListByCardGuid).toHaveBeenCalled()
     }))
 
     it('should return null because the cards of the list were null', inject([CardService], (service: CardService) => {
@@ -57,11 +61,11 @@ describe('CardService.getCard', () => {
             cards: null
         }
 
-        spyOn(service.cardListService, 'getCardListByCardGuid').and.returnValue(cardList)
+        spyOn(cardListService, 'getCardListByCardGuid').and.returnValue(cardList)
 
         const card = service.getCard(cardGuid)
 
         expect(card).toEqual(null)
-        expect(service.cardListService.getCardListByCardGuid).toHaveBeenCalled()
+        expect(cardListService.getCardListByCardGuid).toHaveBeenCalled()
     }))
 })

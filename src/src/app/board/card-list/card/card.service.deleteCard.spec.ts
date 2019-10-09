@@ -5,10 +5,14 @@ import { CardListsService } from '../card-lists.service';
 import { CardService } from './card.service';
 
 describe('CardService.deleteCard', () => {
+    let cardListService: CardListsService
+
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [CardService, CardListsService]
         });
+
+        cardListService = TestBed.get(CardListsService)
     });
 
     it('should delete the card', inject([CardService], (service: CardService) => {
@@ -23,13 +27,13 @@ describe('CardService.deleteCard', () => {
             cards: [card]
         }
 
-        spyOn(service.cardListService, 'getCardListByCardGuid').and.returnValue(cardList)
+        spyOn(cardListService, 'getCardListByCardGuid').and.returnValue(cardList)
 
         const deleted = service.deleteCard(card)
 
         expect(deleted).toEqual(true)
         expect(cardList.cards.length).toEqual(0)
-        expect(service.cardListService.getCardListByCardGuid).toHaveBeenCalled()
+        expect(cardListService.getCardListByCardGuid).toHaveBeenCalled()
     }))
 
     it('should return false because the card is null', inject([CardService], (service: CardService) => {
@@ -44,11 +48,11 @@ describe('CardService.deleteCard', () => {
         card.title = 'Card title'
         card.description = 'Card description'
 
-        spyOn(service.cardListService, 'getCardListByCardGuid').and.returnValue(null)
+        spyOn(cardListService, 'getCardListByCardGuid').and.returnValue(null)
 
         const deleted = service.deleteCard(card)
 
         expect(deleted).toEqual(false)
-        expect(service.cardListService.getCardListByCardGuid).toHaveBeenCalled()
+        expect(cardListService.getCardListByCardGuid).toHaveBeenCalled()
     }))
 })

@@ -7,10 +7,14 @@ import { CardListsService } from '../card-lists.service';
 import { CardService } from './card.service';
 
 describe('CardService.addCard', () => {
+    let cardListService: CardListsService
+
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [CardService, CardListsService]
         });
+
+        cardListService = TestBed.get(CardListsService)
     });
 
     it('should return create the card', inject([CardService], (cardService: CardService) => {
@@ -22,15 +26,15 @@ describe('CardService.addCard', () => {
         let card = new Card()
         card.title = 'title'
 
-        spyOn(cardService.cardListService, 'getCardLists').and.returnValue([])
-        spyOn(cardService.cardListService, "getCardList").and.returnValue(cardList)
+        spyOn(cardListService, 'getCardLists').and.returnValue([])
+        spyOn(cardListService, "getCardList").and.returnValue(cardList)
 
         let result = cardService.addCard(card, cardList.guid)
 
         expect(result).toEqual(true)
         expect(cardList.cards.length).toEqual(1)
-        expect(cardService.cardListService.getCardLists).toHaveBeenCalled()
-        expect(cardService.cardListService.getCardList).toHaveBeenCalled()
+        expect(cardListService.getCardLists).toHaveBeenCalled()
+        expect(cardListService.getCardList).toHaveBeenCalled()
     }))
 
     it('should return true because the card will be converted to array', inject([CardService], (cardService: CardService) => {
@@ -43,15 +47,15 @@ describe('CardService.addCard', () => {
         let card = new Card()
         card.title = 'title'
 
-        spyOn(cardService.cardListService, 'getCardLists').and.returnValue([])
-        spyOn(cardService.cardListService, "getCardList").and.returnValue(cardList)
+        spyOn(cardListService, 'getCardLists').and.returnValue([])
+        spyOn(cardListService, "getCardList").and.returnValue(cardList)
 
         let result = cardService.addCard(card, cardList.guid)
 
         expect(result).toEqual(true)
         expect(cardList.cards.length).toEqual(1)
-        expect(cardService.cardListService.getCardLists).toHaveBeenCalled()
-        expect(cardService.cardListService.getCardList).toHaveBeenCalled()
+        expect(cardListService.getCardLists).toHaveBeenCalled()
+        expect(cardListService.getCardList).toHaveBeenCalled()
     }))
 
     it('should return false because guid is null', inject([CardService], (cardService: CardService) => {
@@ -82,26 +86,26 @@ describe('CardService.addCard', () => {
             name: 'Card List'
         }
 
-        spyOn(cardService.cardListService, 'getCardLists').and.returnValue([])
+        spyOn(cardListService, 'getCardLists').and.returnValue([])
 
         let result = cardService.addCard(card, cardList.guid)
 
         expect(result).toEqual(false)
         expect(cardList.cards.length).toEqual(0)
-        expect(cardService.cardListService.getCardLists).toHaveBeenCalled()
+        expect(cardListService.getCardLists).toHaveBeenCalled()
     }))
 
     it('should return false because card not found', inject([CardService], (cardService: CardService) => {
         let card = new Card()
         card.title = 'title'
 
-        spyOn(cardService.cardListService, "getCardLists").and.returnValue([])
-        spyOn(cardService.cardListService, "getCardList").and.returnValue(null)
+        spyOn(cardListService, "getCardLists").and.returnValue([])
+        spyOn(cardListService, "getCardList").and.returnValue(null)
 
         let result = cardService.addCard(card, Guid.create())
 
         expect(result).toEqual(false)
-        expect(cardService.cardListService.getCardLists).toHaveBeenCalled()
-        expect(cardService.cardListService.getCardList).toHaveBeenCalled()
+        expect(cardListService.getCardLists).toHaveBeenCalled()
+        expect(cardListService.getCardList).toHaveBeenCalled()
     }))
 });
