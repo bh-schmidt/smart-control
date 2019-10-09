@@ -11,7 +11,7 @@ export class CardListsService {
 
     constructor() { }
 
-    getCardLists(): CardList[]{
+    getCardLists(): CardList[] {
         return this.cardLists
     }
 
@@ -24,7 +24,7 @@ export class CardListsService {
     }
 
     addCardList(cardListName: string): boolean {
-        if(!cardListName){
+        if (!cardListName) {
             return false
         }
 
@@ -52,12 +52,12 @@ export class CardListsService {
 
         var existingCardList = this.cardLists.find(x => x.guid === guid)
 
-        if (existingCardList) {
-            existingCardList.name = name
-            return true
+        if (!existingCardList) {
+            return false
         }
 
-        return false
+        existingCardList.name = name
+        return true
     }
 
     deleteCardList(listGuid: Guid): boolean {
