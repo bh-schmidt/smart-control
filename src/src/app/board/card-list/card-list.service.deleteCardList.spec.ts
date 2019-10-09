@@ -13,7 +13,18 @@ describe('CardListService.getCardLists', () => {
         service.addCardList('Card List 3')
     })
 
-    it('should ', inject([CardListsService], (cardService: CardListsService) => {
+    it('should ', inject([CardListsService], (service: CardListsService) => {
+        const lists = service.getCardLists()
+        const list = lists[1]
         
+        const deleted = service.deleteCardList(list.guid)
+
+        let x:string = null
+
+        // console.log(''.isNullOrEmpty());
+        // console.log(x.isNullOrEmpty());
+
+        expect(deleted).toEqual(true)
+        expect(lists.length).toEqual(2)
     }))
 })
