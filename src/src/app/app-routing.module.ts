@@ -4,14 +4,14 @@ import { BoardComponent } from './board/board.component';
 
 
 const routes: Routes = [
-  {
-    path: '',
-    component: BoardComponent
-  }
+    {
+        path: '',
+        component: BoardComponent
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

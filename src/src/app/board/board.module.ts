@@ -9,7 +9,7 @@ import { ViewCardComponent } from './card-list/card/view-card/view-card.componen
 import { NewCardComponent } from './card-list/card/new-card/new-card.component';
 import { EditCardComponent } from './card-list/card/edit-card/edit-card.component';
 import { SharedModule } from '../shared/shared.module';
-import { DeleteCardListComponent } from './card-list/delete-card-list/delete-card-list.component';
+import { DeleteCardListComponent } from './delete-card-list/delete-card-list.component';
 import { DeleteCardComponent } from './card-list/card/delete-card/delete-card.component';
 import { CardListsService } from './card-list/card-lists.service';
 import { CardService } from './card-list/card/card.service';

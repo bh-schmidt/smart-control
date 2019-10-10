@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { CardList } from './card-list';
 import { Guid } from 'guid-typescript';
-import { Card } from './card';
+import { Observable, Subscriber, Subject } from 'rxjs';
 import { ArrayHelper } from 'src/app/shared/helpers/array-helper';
+import { CardList } from './card-list';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CardListsService {
     private cardLists: CardList[] = []
+
+    private subject: Subject<CardList[]> = new Subject<CardList[]>()
+
+    cardListsObservable: Observable<CardList[]> = this.subject.asObservable()
 
     constructor() { }
 
@@ -38,6 +42,7 @@ export class CardListsService {
         }
 
         this.cardLists.push(new CardList({ guid: Guid.create(), name: cardListName }))
+        this.publishCardList()
 
         return true
     }
@@ -58,6 +63,7 @@ export class CardListsService {
         }
 
         existingCardList.name = name
+        this.publishCardList()
         return true
     }
 
@@ -66,7 +72,13 @@ export class CardListsService {
             return false
         }
 
-        return ArrayHelper.removeItem(this.cardLists, list => list.guid === listGuid)
+        const deleted = ArrayHelper.removeItem(this.cardLists, list => list.guid === listGuid)
+
+        if (deleted) {
+            this.publishCardList()
+        }
+
+        return deleted
     }
 
     getCardListByCardGuid(cardGuid: Guid): CardList {
@@ -75,6 +87,10 @@ export class CardListsService {
         }
 
         return this.cardLists.find(list => list.cards.some(card => card.guid === cardGuid))
+    }
+
+    private publishCardList() {
+        this.subject.next(this.cardLists)
     }
 
     private isThereCardListName(name: string): boolean {

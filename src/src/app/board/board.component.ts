@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CardListsService } from './card-list/card-lists.service';
+import { CardList } from './card-list/card-list';
 
 @Component({
     selector: 'app-board',
@@ -7,8 +8,13 @@ import { CardListsService } from './card-list/card-lists.service';
     styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
+    cardLists: CardList[] = []
 
-    constructor(public cardListsService: CardListsService) { }
+    constructor(cardListsService: CardListsService) { 
+        cardListsService.cardListsObservable.subscribe(cardLists => {
+            this.cardLists = cardLists
+        })
+    }
 
     ngOnInit() {
     }

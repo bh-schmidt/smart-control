@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalSize } from 'src/app/shared/components/modal/modal-size.enum';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { CardList } from '../card-list';
-import { CardListsService } from '../card-lists.service';
+import { CardList } from '../card-list/card-list';
+import { CardListsService } from '../card-list/card-lists.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { DeleteCardListComponent } from './delete-card-list.component';
-import { BoardModule } from '../../board.module';
+import { BoardModule } from '../board.module';
 import { ToastrModule } from 'ngx-toastr';
 
 describe('DeleteCardListComponent', () => {

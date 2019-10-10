@@ -4,7 +4,7 @@ import { CardListsService } from './card-lists.service';
 import { Card } from './card';
 import { CardList } from './card-list';
 import { EditCardComponent } from './card/edit-card/edit-card.component';
-import { DeleteCardListComponent } from './delete-card-list/delete-card-list.component';
+import { DeleteCardListComponent } from '../delete-card-list/delete-card-list.component';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
