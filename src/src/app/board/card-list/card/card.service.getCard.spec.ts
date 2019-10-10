@@ -2,13 +2,14 @@ import { inject, TestBed } from '@angular/core/testing';
 import { Guid } from 'guid-typescript';
 import { CardListsService } from '../card-lists.service';
 import { CardService } from './card.service';
+import { BoardModule } from '../../board.module';
 
 describe('CardService.getCard', () => {
     let cardListService: CardListsService
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [CardService, CardListsService]
+            imports: [BoardModule]
         });
 
         cardListService = TestBed.get(CardListsService)

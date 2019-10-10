@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CardListsService } from '../card-lists.service';
 import { Card } from '../card';
 import { Guid } from 'guid-typescript';
+import { ArrayHelper } from 'src/app/shared/helpers/array-helper';
 
 @Injectable({
     providedIn: 'root'
@@ -68,8 +69,7 @@ export class CardService {
             return false
         }
 
-        this.removeItemFromArray<Card>(cardList.cards, c => c.guid === card.guid)
-        return true
+        return ArrayHelper.removeItem(cardList.cards, c => c.guid === card.guid)
     }
 
     getCard(cardGuid: Guid): Card {
@@ -113,20 +113,5 @@ export class CardService {
 
         return cardLists.some(list =>
             list.cards && list.cards.some(card => card && card.title === title && card.guid !== cardGuid))
-    }
-
-    private removeItemFromArray<TItem>(array: TItem[], predicate: (item: TItem) => boolean) {
-        if (!predicate || !array) {
-            return
-        }
-
-        const item = array.find(predicate)
-
-        if (!item) {
-            return
-        }
-
-        const index = array.indexOf(item)
-        array.splice(index, 1)
     }
 }

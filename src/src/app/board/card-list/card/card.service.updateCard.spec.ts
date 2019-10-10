@@ -4,13 +4,14 @@ import { Card } from '../card';
 import { CardListsService } from '../card-lists.service';
 import { CardService } from './card.service';
 import { CardList } from '../card-list';
+import { BoardModule } from '../../board.module';
 
 describe('CardService.updateCard', () => {
     let cardListService: CardListsService
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [CardService, CardListsService]
+            imports: [BoardModule]
         });
 
         cardListService = TestBed.get(CardListsService)

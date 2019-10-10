@@ -3,13 +3,14 @@ import { Guid } from 'guid-typescript';
 import { Card } from '../card';
 import { CardListsService } from '../card-lists.service';
 import { CardService } from './card.service';
+import { BoardModule } from '../../board.module';
 
 describe('CardService.deleteCard', () => {
     let cardListService: CardListsService
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [CardService, CardListsService]
+            imports: [BoardModule]
         });
 
         cardListService = TestBed.get(CardListsService)

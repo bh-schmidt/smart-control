@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CardList } from './card-list';
 import { Guid } from 'guid-typescript';
 import { Card } from './card';
+import { ArrayHelper } from 'src/app/shared/helpers/array-helper';
 
 @Injectable({
     providedIn: 'root'
@@ -65,8 +66,7 @@ export class CardListsService {
             return false
         }
 
-        this.cardLists = this.cardLists.filter(list => list.guid !== listGuid)
-        return true
+        return ArrayHelper.removeItem(this.cardLists, list => list.guid === listGuid)
     }
 
     getCardListByCardGuid(cardGuid: Guid): CardList {
